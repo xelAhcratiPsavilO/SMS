@@ -52,5 +52,8 @@ let send = function(number, message) {
   );
 }
 
-// start the server
-app.listen(3000);
+// Define port
+const PORT = process.env.PORT || 5000;
+
+// Start server
+const server = app.listen(PORT, () => console.log(`Server started on ${ PORT }`));
