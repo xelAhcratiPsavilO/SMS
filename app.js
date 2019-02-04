@@ -37,7 +37,21 @@ app.post('/notify', (request, response) => {
 });
 
 app.get('/response', (request, response) => {
-  // TODO: Confirm selection
+  // TODO: store this selection somewhere in your database
+
+  // parse the message the user sent us
+  const selection = parseInt(request.query.text) - 1;
+  const day = options[selection];
+
+  // by default we will warn them to send us a valid response
+  let message = "Please select from one of the valid options only.";
+
+  // if the response was valid though we confirm the selection
+  if (day) {
+    message = `Thank you! Your delivery has been rescheduled for ${day}`;
+  }
+
+  send(request.query.msisdn, message);
   response.send('Response processed');
 });
 
