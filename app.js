@@ -40,19 +40,28 @@ app.get('/response', (request, response) => {
   // TODO: store this selection somewhere in your database
 
   // parse the message the user sent us
+  console.log("AAAAAAA1" + `${request.query.text}`);
+
   const selection = parseInt(request.query.text) - 1;
+  console.log("AAAAAAA2" + `${parseInt(request.query.text)}`);
+
   const day = options[selection];
+  console.log("AAAAAAA3" + `${selection}`);
 
   // by default we will warn them to send us a valid response
   let message = "Please select from one of the valid options only.";
+  console.log(`AAAAAAA4 ${day}`);
 
   // if the response was valid though we confirm the selection
   if (day) {
     message = `Thank you! Your delivery has been rescheduled for ${day}`;
   }
+  console.log(`AAAAAAA5 ${message}`);
 
   send(request.query.msisdn, message);
   response.send('Response processed');
+  console.log("AAAAAAA6");
+
 });
 
 let send = function(number, message) {
